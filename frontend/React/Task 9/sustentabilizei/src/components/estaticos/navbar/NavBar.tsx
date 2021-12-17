@@ -1,14 +1,15 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, Box, } from '@material-ui/core';
+import React, { useState } from 'react';
+import { AppBar, Toolbar, Typography, Box } from '@material-ui/core';
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom"
-import "./NavBar.css"
+import "./NavBar.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
 import { addToken } from '../../../store/tokens/actions';
 import { toast } from "react-toastify";
 
-function Navbar() {
 
+function Navbar() {
     let history = useHistory();
     const token = useSelector<TokenState, TokenState["tokens"]>(
         (state) => state.tokens
@@ -17,7 +18,7 @@ function Navbar() {
 
     function goLogout() {
         dispatch(addToken(""));
-        toast.info("Usuário deslogado", {
+        toast.info("Usurio logado", {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: false,
@@ -31,101 +32,124 @@ function Navbar() {
     }
 
     var navbarComponent;
+    var navbarhomeComponent;
 
     if (token !== "") {
-        navbarComponent = <AppBar position="static"  >
-            <Toolbar variant="dense" className="color-nav container">
-                <Box style={{ cursor: "pointer" }} >
-                    <Typography variant="h5" color="inherit">
-                        Sustentabilizei
-                    </Typography>
-                </Box>
-
-
-
-                <Box display="flex" justifyContent="start" className="container2" >
-                    <Box mx={1} style={{ cursor: "pointer" }}>
-                        <Typography variant="h6" color="inherit">
-                            Home
-                        </Typography>
-                    </Box>
-                    <Box mx={1} style={{ cursor: "pointer" }} className="container2">
-                        <Typography variant="h6" color="inherit">
-                            Sobre Nós
-                        </Typography>
-                    </Box>
-                    <Box mx={1} style={{ cursor: "pointer" }} className="container2">
-                        <Typography variant="h6" color="inherit">
-                            Contato
-                        </Typography>
-                    </Box>
-                </Box>
-                <Box
-                    display="inline-flex"
-                    justifyContent="end"
-                    alignItems="end"
-                    marginLeft="1230px"
-                >
-
-    return (
-        <>
-
-            <AppBar position="static"  >
-                <Toolbar variant="dense" className= "color-nav container">
-                    <Box style={{ cursor: "pointer" }} >
-                        <Typography variant="h5" id="colorText">
-                            Sustentabilizei
-                        </Typography>
-                    </Box>
-                    
-
-                    
-                    <Box display="flex" justifyContent="start" className= "container2" >
-                        <Box mx={2} style={{ cursor: "pointer" }}>
-                            <Typography variant="h6" color="inherit" id="efeito">
-                               Home
-                            </Typography>
-                        </Box>
-                        <Box mx={2} style={{ cursor: "pointer" }}  className= "container2">
-                            <Typography variant="h6" color="inherit" id="efeito">Sobre Nós</Typography>
-                        </Box>
-                        <Box mx={2} style={{ cursor: "pointer" }}  className= "container2" id="efeito">
-                            <Typography variant="h6" color="inherit">
-                                Contato
-                            </Typography>
-                        </Box>
-                    </Box>
-                   <Box 
-                   display = "inline-flex"
-                   justifyContent = "end"
+        navbarComponent = <AppBar position="relative" style={{ backgroundColor: "#263165" }}>
+            <Toolbar variant="dense" >
+                    <div>
+                    <img className="imglogo9" src="https://i.imgur.com/fmYFcHr.png" alt="" />
+                    </div>
+                    <Box 
+                   display = "flex"
+                   justifyContent = "center"
                    alignItems = "center"
-                   marginLeft = "1230px"
-                   >
+                   marginLeft = "200px" ></Box>
 
-                    <Box display="flex"  >
-                        <Box mx={1} style={{ cursor: "pointer" }}>
-                            <Typography variant="h6" color="inherit">
-                                Login
-                            </Typography>
-                        </Box>
+                <Box display="flex" justifyContent="start"> 
+                    <Box mx={1} style={{ cursor: "pointer" }} >
+                        <Typography variant="h6" className="texto">
+                            Feed
+                        </Typography>
                     </Box>
-                    <Box display="flex"  >
-                        <Box mx={1} style={{ cursor: "pointer" }}>
-                            <Typography variant="h6" color="inherit">
-                                Cadastre-se
-                            </Typography>
-                        </Box>
+
+                    <Box mx={1} style={{ cursor: "pointer" }} >
+                        <Typography variant="h6" className="texto">
+                            Postagem
+                        </Typography>
                     </Box>
+
+                    <Box mx={1} style={{ cursor: "pointer" }} >
+                        <Typography variant="h6" className="texto">
+                            Tema
+                        </Typography>
+                    </Box>
+
+                    <Box mx={1} style={{ cursor: "pointer" }} >
+                        <Typography variant="h6" className="texto">
+                            Cadastar Tema
+                        </Typography>
+                    </Box>
+
+
+                    <Box mx={1} style={{ cursor: "pointer" }} >
+                        <Typography variant="h6" className="texto">
+                            Postagens
+                        </Typography>
+                    </Box>
+
+                    <Box mx={1} style={{ cursor: "pointer" }} >
+                        <Typography variant="h6" className="texto">
+                            Cadastrar Postagens
+                        </Typography>
+                    </Box>
+
+
+                    <Box mx={1} style={{ cursor: "pointer" }} onClick={goLogout}>
+                        <Typography variant="h6" className="texto">
+                            Logout
+                        </Typography>
+                    </Box>
+
+
                 </Box>
+
             </Toolbar>
         </AppBar>
     }
 
+    if (token == "") {
+        navbarhomeComponent = <AppBar position="relative" style={{ backgroundColor: "#263165" }}>
+            <Toolbar variant="dense" >
+                <Box style={{ cursor: "pointer" }} >
+                    <Typography variant="h5" className="titulo">
+                    <div>
+                    <img className="imglogo8" src="https://i.imgur.com/fmYFcHr.png" alt="" />
+                    </div>
+                    </Typography>
+                </Box>
+                <Box mx={1} style={{ cursor: "pointer" }} >
+                        <Typography variant="h6" className="texto">
+                            Home
+                        </Typography>
+                    </Box>
+
+                    <Box mx={1} style={{ cursor: "pointer" }} >
+                        <Typography variant="h6" className="texto">
+                            Sobre NÃ³s
+                        </Typography>
+                    </Box>
+
+                    <Box mx={1} style={{ cursor: "pointer" }} >
+                        <Typography variant="h6" className="texto">
+                            Contatos
+                        </Typography>
+                    </Box>
+                   <Box 
+                   display = "flex"
+                   justifyContent = "center"
+                   alignItems = "center"
+                   marginLeft = "450px" ></Box>
+                   
+
+                    <Box mx={1} style={{ cursor: "pointer" }} >
+                        <Typography variant="h6" className="texto">
+                            <Link to = "/login">
+                            Login
+                            </Link>
+                        </Typography>
+                    </Box>
+            </Toolbar>
+        </AppBar>
+    }
     return (
         <>
             {navbarComponent}
+            {navbarhomeComponent}
         </>
     )
 }
+
+
 
 export default Navbar;
